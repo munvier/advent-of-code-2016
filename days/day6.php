@@ -12,8 +12,6 @@
 
     foreach($lines as $line) {
         foreach( str_split($line) as $index => $char) {
-            $chars = range('a', 'z');
-
             if (!isset($characters[$index]) || !is_array($characters[$index])) {
                 $characters[$index] = [];
             }
@@ -39,13 +37,16 @@
     echo "Part one : Corrected message is : '".$corrected_message."'";
     echo "\n";
 
+
+    //
+    // PART TWO
+    //
+
     $characters         = [];
     $corrected_message  = "";
 
     foreach($lines as $line) {
         foreach( str_split($line) as $index => $char) {
-            $chars = range('a', 'z');
-
             if (!isset($characters[$index]) || !is_array($characters[$index])) {
                 $characters[$index] = [];
             }

@@ -29,6 +29,9 @@
     echo "Part one : password is '".implode('', $password)."' ({$cpt} iterations).";
     echo "\n";
 
+    //
+    // PART TWO
+    //
 
     $password   = [];
     $cpt        = 0;

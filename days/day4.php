@@ -47,6 +47,10 @@
     echo "Part one : Sectors IDs sum is ".$sectors_ids;
     echo "\n";
 
+    //
+    // PART TWO
+    //
+
     foreach($real_rooms_encrypted_names as $real_encrypted_room_name => $sector_id) {
         $real_encrypted_room_name_chars         = str_split($real_encrypted_room_name);
         $real_encrypted_room_name_chars_count   = count($real_encrypted_room_name_chars);
@@ -64,7 +68,6 @@
 
         if (strpos($decrypted_text, 'north') !== false) {
             echo "Part two : Location is '".$decrypted_text."' with sector id ".$sector_id;
-            echo "\n";
             break;
         }
     }
