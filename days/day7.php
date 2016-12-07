@@ -12,8 +12,8 @@
     foreach($lines as $line_index => $line) {
         preg_match_all("/(\w+)/i", $line, $matches);
         
-        $strings        = $matches[0];
-        $hasTlsSupport  = false;
+        $strings            = $matches[0];
+        $hasTlsSupport      = false;
         
         foreach($strings as $index => $string) {
             $hasABBA        = false;
@@ -31,9 +31,8 @@
                 }
             }
             
-            if ($hasTlsSupport && $hasABBA && $index%2 == 1) {
-                $hasTlsSupport = false;
-                break;
+            if ($hasABBA && $index%2 == 1) {
+                continue 2;
             }
             
             if ($hasABBA && $index%2 == 0) {
