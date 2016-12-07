@@ -69,4 +69,4 @@
         $corrected_message .= $letter;
     }
 
-    echo "Part one : Corrected message is : '".$corrected_message."'";
+    echo "Part two : Corrected message is : '".$corrected_message."'";
