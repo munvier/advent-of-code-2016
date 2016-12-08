@@ -12,8 +12,8 @@
     
     foreach($lines as $line) {
         if (preg_match_all('/rect (\d+)x(\d+)/i', $line, $matches)) {
-            $length = (int) $matches[1];
-            $height = (int) $matches[2];
+            $length = (int) $matches[1][0];
+            $height = (int) $matches[2][0];
             
             foreach($rect as $y_pos => $x) {
                 if ($y_pos == $height) { break; }
