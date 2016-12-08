@@ -42,6 +42,16 @@
                     $temp   = [];
                     $x_pos  = (int) $matches[3][0];
                     
+                    foreach($rect as $y_pos => $x) {
+                        $temp[($y_pos + (int) $matches[4][0])%6] = $rect[$y_pos][$x_pos];
+                    }
+                    
+                    ksort($temp);
+                    
+                    foreach($temp as $y_pos => $x) {
+                        $rect[$y_pos][$x_pos] = $temp[$y_pos];
+                    }
+                    
                     break;
                 default:
                     break;
