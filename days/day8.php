@@ -8,6 +8,7 @@
 
     $lines              = explode("\n", $input);
     $rect               = array_fill(0, 6, array_fill(0, 50, false));
+    $lights_on          = 0;
     
     foreach($lines as $line) {
         if (preg_match_all('/rect (\d+)x(\d+)/i', $line, $matches)) {
@@ -60,8 +61,11 @@
     }
     foreach($rect as $y_pos => $x) {
         foreach($x as $x_pos => $light) {
+            $lights_on += ($light) ? 1 : 0;
             echo ($light) ? "X" : ".";
         }
         echo "\n";
     }
+    
+    echo "Part one : number of lights on : ".$lights_on;
     
