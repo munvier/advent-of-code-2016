@@ -66,7 +66,8 @@
     //
 
     $hq_found           = false;
-    $visited_positions  = [];
+    $visited_positions  = [
+    ];
 
     $cardinal_direction = 0; // Initialize cardinal direction
     $player_x_position  = 0; // Initialize x pos
