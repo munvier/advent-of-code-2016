@@ -4,51 +4,31 @@
     //
 
     // We get the input from the site
-    $input              = file_get_contents('inputs/day8.txt');
+    $input              = trim(file_get_contents('inputs/day9.txt'));
 
-    $tests = [
-        'A(1x5)BC',
-        'ADVENT',
-        'A(2x2)BCD(2x2)EFG',
-        '(6x1)(1x3)A',
-        'X(8x2)(3x3)ABCY',
-        'X(8x2)(3x3)ABCYX(8x2)(3x3)ABCY'
-    ];
+    function get_length($string, $recursive = false) {
+        $string_length          = strlen($string);
+        $length                 = $string_length;
 
-    foreach($tests as $test) {
-        echo "TEST  : ".$test;
-        echo "\n";
+        for($i = 0; $i < $string_length; $i++) {
+            if ($string[$i] !== '(') { continue; }
 
-        $newString          = "";
-        $nextPosToCompute   = 0;
+            preg_match('/^\((\d+)x(\d+)\)/i', substr($string, $i), $matches);
 
-        if (preg_match_all('/\((\d+)x(\d+)\)/i', $test, $matches, PREG_OFFSET_CAPTURE)) {
-            foreach($matches[0] as $index => $marker) {
-                $marker_string      = $matches[0][$index][0];
-                $marker_pos         = $matches[0][$index][1];
-                $string_length      = $matches[1][$index][0];
-                $repetitions        = $matches[2][$index][0];
+            $match_length               = $matches[1];
+            $times                      = $matches[2];
 
-                if ($nextPosToCompute <= $marker_pos) {
+            $start                      = $i + strlen($matches[0]);
+            $to_repeat                  = substr($string, $start, $match_length);
+            $decompressed_length        = $recursive ? get_length($to_repeat, true) : strlen($to_repeat);
+            $length                     += ($decompressed_length * $times) - strlen($to_repeat) - strlen($matches[0]);
 
-                    $string_to_repeat   = substr($test, $marker_pos + strlen($marker_string), $string_length);
-                    $newString .= substr($test, $nextPosToCompute, $marker_pos - $nextPosToCompute);
-
-
-                    for($i = 0; $i < $repetitions; $i++) {
-                        $newString .= $string_to_repeat;
-                    }
-
-                    $nextPosToCompute = $marker_pos + strlen($marker_string) + $string_length;
-                }
-            }
+            $i = $start + strlen($to_repeat) - 1;
         }
 
-        if ($nextPosToCompute < strlen($test)) {
-            $newString .= substr($test, $nextPosToCompute);
-        }
-
-        echo "RESULT: ".$newString;
-        echo "\n";
-        echo "\n";
+        return $length;
     }
+
+    echo "Part one : decompressed string length is ".get_length($input);
+    echo "\n";
+    echo "Part two : decompressed string length is ".get_length($input, true);
