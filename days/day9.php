@@ -1,8 +1,4 @@
 <?php
-    //
-    // PART ONE
-    //
-
     // We get the input from the site
     $input              = trim(file_get_contents('inputs/day9.txt'));
 
